@@ -3,7 +3,7 @@
 // Get the user's Documents folder
 string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 // the file in the temp folder
-string filePath = Path.Combine(documentsPath, "temp-test", "test-file.txt");
+string filePath = Path.Combine(documentsPath, "QuickNotes", "test-file.txt");
 
 
 if (File.Exists(filePath))
@@ -18,7 +18,7 @@ if (File.Exists(filePath))
     string? inputString = Console.ReadLine();
 
     // Apply Delimiters
-    inputString = $"\n-----{DateTime.Now}\n{inputString}\n-----";
+    inputString = $"\n----- {DateTime.Now.ToString("MMM. d, yyyy  [ hh:mm tt ]")}\n{inputString}\n-----";
 
     // Write
     File.AppendAllText(filePath, inputString);
