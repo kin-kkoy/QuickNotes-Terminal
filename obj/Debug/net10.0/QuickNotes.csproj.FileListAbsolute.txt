@@ -12,3 +12,4 @@
 /home/makkaon/Documents/Projects/Self/terminal-quickNotes/QuickNotes/obj/Debug/net10.0/QuickNotes.pdb
 /home/makkaon/Documents/Projects/Self/terminal-quickNotes/QuickNotes/obj/Debug/net10.0/QuickNotes.genruntimeconfig.cache
 /home/makkaon/Documents/Projects/Self/terminal-quickNotes/QuickNotes/obj/Debug/net10.0/ref/QuickNotes.dll
+/home/makkaon/Documents/Projects/Self/terminal-quickNotes/QuickNotes/obj/Debug/net10.0/QuickNotes.sourcelink.json

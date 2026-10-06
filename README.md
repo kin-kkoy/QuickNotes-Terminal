@@ -6,6 +6,7 @@ A terminal app for quick "write and forget" notes. Notes are plain `.txt` files 
 
 ```
 namespace: school
+
 ----- 2026-10-06 14:32
 apply plastic cover on notebook
 -----
@@ -20,12 +21,12 @@ also check printer ink
 - Parse **line by line** with an "inside a note?" flag (a small state machine) instead of `Split`
 
 ### Open format decisions
-- [ ] What if a note itself contains a line that is exactly `---`? (ignore / escape / different delimiter)
+- [ ] What if a note itself contains a line that is exactly `-----`? (ignore / escape / different delimiter)
 - [x] Add timestamps to the delimiter line? → yes, on the opener
 - [x] Exact delimiter → exactly five dashes `-----`
 - [x] Delimiter before and after each note? → yes: dated opener, bare closer
 - [ ] One file per namespace, or several? (if several: which file gets new notes?)
-- [ ] Default root folder location
+- [X] Default root folder location → `~/Documents/QuickNotes/` (`Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "QuickNotes")`)
 - [ ] How does the user finish typing a note? (blank line / `.` / Ctrl+D; **not** Ctrl+S or Ctrl+Q, since terminals use those for flow control)
 
 ## Progress
@@ -63,7 +64,15 @@ also check printer ink
   - Read and parse the file → select a note → edit or delete it.
   - Save safely: modify in memory → write everything to a temp file → replace the original with it.
 
-**When 1 to 6 are done, the MVP is complete.**
+- [ ] **7. Native AOT build**
+  - Compile ahead-of-time to a single native executable: near-instant startup, no JIT warm-up, no .NET runtime needed on the machine.
+  - Add `<PublishAot>true</PublishAot>` to `QuickNotes.csproj`.
+  - Publish with `dotnet publish -c Release -r linux-x64` (output lands in `bin/Release/net*/linux-x64/publish/`).
+  - Linux build prerequisites: `clang` and `zlib` dev package.
+  - Fix any **trim/AOT warnings** the publish prints (they mean something may break at runtime).
+  - Put the binary on your `PATH` (e.g. as `qn`) so it opens from any terminal.
+
+**When 1 to 7 are done, the MVP is complete.**
 
 ### v1.x (Quality of life)
 - [ ] **1.1 CLI arguments**: e.g. `qn school "apply plastic cover"` adds a note without opening the menu
@@ -128,6 +137,7 @@ also check printer ink
 | Grouping with LINQ | `GroupBy`, `Select`, `Where`, `ToList` |
 
 ### Concepts to read about
+- [ ] Native AOT vs JIT: what changes, and its limits (reflection, dynamic code loading, trimming)
 - [ ] The `using` statement / `IDisposable` (why streams must be closed)
 - [ ] Exceptions from file I/O: `IOException`, `FileNotFoundException`, `UnauthorizedAccessException`
 - [ ] Why you can't "insert" into the middle of a file (rewrite it instead)
