@@ -42,7 +42,7 @@ also check printer ink
   - File path is still hardcoded.
   - Prompt the user to type a note, read it, wrap it with the delimiter + date/time, and append it to the file.
 
-- [ ] **3. Read and parse the file**
+- [X] **3. Read and parse the file**
   - Read the whole file's contents.
   - Split it into individual notes (one note per delimiter block).
   - Store each note as an element in a `List<string>` (or a list of a small note type later on).
