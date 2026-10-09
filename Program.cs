@@ -8,7 +8,7 @@ string filePath = Path.Combine(documentsPath, "QuickNotes", "test-file.txt");
 
 if (File.Exists(filePath))
 {
-    // clearing (this line below is temp and can be removed anytime)
+    // // clearing (this line below is temp and can be removed anytime)
     // File.WriteAllText(filePath, "");
 
 
@@ -27,9 +27,10 @@ if (File.Exists(filePath))
 
     // Read
     string[] fileContents = File.ReadAllLines(filePath);
-    foreach (var line in fileContents)
+    List<string> notes = SectionDissector(fileContents);
+    foreach (var line in notes)
     {
-        Console.WriteLine(line);
+        Console.WriteLine($"Note:\t{line}");
     }
 }
 else
@@ -59,3 +60,27 @@ else
 //     Console.Write(">  ");
 // }
 
+List<string> SectionDissector(string[] fileContents)
+{
+    List<string> notes = new List<string>();
+
+    foreach (string line in fileContents)
+    {
+        // // namespace line
+        // if(line.StartsWith("namespace:"))   continue;
+        // // starting/opening delimiter
+        // if(line.StartsWith($"----- "))  continue;
+        // // closing delimiter
+        // if(line == "-----")  continue;
+        if(line.StartsWith("namespace:") ||
+             line.StartsWith($"----- ") || 
+             line == "-----" || 
+             line.IsWhiteSpace())   
+                continue;
+
+
+        notes.Add(line);
+    }
+
+    return notes;
+}
